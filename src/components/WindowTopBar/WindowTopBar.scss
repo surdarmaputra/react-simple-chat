@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.window-top-bar {
+	width: 100%;
+	height: 100%;
+	padding: $baseline * 0.5;
+	box-sizing: border-box;
+
+	&__image {
+		width: $baseline;
+		height: $baseline;
+		margin-right: $baseline * 0.2;
+	}
+
+	&__title {
+		display: block;
+	}
+
+	&__meta {
+		display: block;
+		@include meta-text();
+	}
+}

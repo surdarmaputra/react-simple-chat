@@ -1,0 +1,25 @@
+@import './styles/scaffoldings';
+
+@import './containers/Sidebar/Sidebar';
+@import './containers/MainWindow/MainWindow';
+
+@import './components/Badge/Badge';
+@import './components/Button/Button';
+@import './components/Contact/Contact';
+@import './components/ContactWindow/ContactWindow';
+@import './components/Input/Input';
+@import './components/InputWindow/InputWindow';
+@import './components/MessageBox/MessageBox';
+@import './components/MessageWindow/MessageWindow';
+@import './components/WindowTopBar/WindowTopBar';
+
+
+.app {
+	width: 80%;
+	height: 80%;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

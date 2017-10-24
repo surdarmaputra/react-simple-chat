@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.sidebar {
+	position: relative;
+	float: left;
+	width: 20%;
+	height: 100%;
+	border-right: 1px solid $primary-line-color;
+	box-sizing: border-box;
+}

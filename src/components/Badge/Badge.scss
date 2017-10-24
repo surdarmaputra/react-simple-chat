@@ -1,0 +1,7 @@
+@import '../../styles/variables';
+
+.badge {
+	padding: $baseline * 0.2;
+	background: darken($primary-background-color, 10%);
+	border-radius: 50%;
+}

@@ -1,0 +1,45 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.contact {
+	height: $baseline * 1.5;
+	padding: $baseline * 0.5;
+	cursor: pointer;
+	background: $primary-background-color;
+	@include transition(all 0.15s);
+
+	&:hover {
+		background: #fcfcfc;
+	}
+
+	&:last-child {
+		border: none;
+	}
+
+	&__image {
+		float: left;
+		width: $baseline;
+		height: $baseline;
+		margin-right: $baseline * 0.2;
+	}
+
+	&__content {
+		float: left;
+		width: 70%
+	}
+
+	&__title {
+		display: block;
+	}
+
+	&__meta {
+		display: block;
+		@include meta-text();	
+	}
+
+	&__date {
+		float:left;
+		margin-left: $baseline * 0.2;
+		@include date-text();	
+	}
+}

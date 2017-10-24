@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.main-window {
+	position: relative;
+	float: left;
+	width: 80%;
+	height: 100%;
+	box-sizing: border-box;
+
+	&__top-bar {
+		position: absolute;
+		height: $baseline * 2.5;
+		top: 0;
+		left: 0;
+		right: 0;
+		border-bottom: 1px solid $primary-line-color;
+		box-sizing: border-box;
+	}
+
+	&__message-window {
+		position: absolute;
+		top: $baseline * 2.5;
+		left: 0;
+		right: 0;
+		bottom: $baseline * 2.5;
+		overflow: auto;
+	}
+
+	&__input-window {
+		position: absolute;
+		height: $baseline * 2.5;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border-top: 1px solid $primary-line-color;
+		box-sizing: border-box;
+	}
+}

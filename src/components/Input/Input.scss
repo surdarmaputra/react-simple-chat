@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.input {
+	padding: $baseline * 0.8;
+	height: 100%;
+	width: 100%;
+	border: none;
+	color: lighten($primary-text-color, 10%);
+	box-sizing: border-box;
+	resize: none;
+
+	&::-webkit-input-placeholder, &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder {
+		color: lighten($primary-text-color, 20%);
+	}
+}

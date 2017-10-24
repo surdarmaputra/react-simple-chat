@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.message-box {
+	padding: $base-padding;
+	margin: $base-margin;
+	border-bottom: 1px solid transparent;
+	@include transition(all 0.15s);
+
+	&:hover {
+		border-bottom: 1px solid $primary-line-color;
+	}
+	
+	&__meta {
+		font-weight: bold;
+		margin-bottom: $baseline * 0.2;
+		@include meta-text();
+	}
+
+	&__date {
+		float: right;
+		font-weight: lighter;
+		@include date-text();
+	}
+}
