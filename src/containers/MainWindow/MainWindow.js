@@ -27,7 +27,6 @@ class MainWindow extends React.Component {
 	}
 
 	scrollToLastMessage() {
-		console.log(this.messageWindow.scrollHeight)
 		this.messageWindow.scrollTop = this.messageWindow.scrollHeight;
 	}
 
@@ -42,6 +41,7 @@ class MainWindow extends React.Component {
 				</div>
 				<div className='main-window__input-window'>
 					<InputWindow placeholder='Say something...' onSubmit={(input) => {
+						(input.length > 0) &&
 						this.setState({
 							messages: [
 								...this.state.messages,

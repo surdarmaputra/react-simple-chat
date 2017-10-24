@@ -19,7 +19,7 @@ class InputWindow extends React.Component {
 		return (
 			<div className='input-window'>
 				<div className='input-window__form'>
-					<Input ref={input => this.input = input} placeholder={this.props.placeholder} />
+					<Input ref={input => this.input = input} placeholder={this.props.placeholder} onSubmit={this.handleSubmit} />
 				</div>
 				<div className='input-window__action'>
 					<Button text='Send' onClick={this.handleSubmit}/>
