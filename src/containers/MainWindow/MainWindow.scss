@@ -16,6 +16,7 @@
 		right: 0;
 		border-bottom: 1px solid $primary-line-color;
 		box-sizing: border-box;
+	    box-shadow: 0 2px 10px 2px #f6f6f6;
 	}
 
 	&__message-window {
@@ -36,5 +37,6 @@
 		bottom: 0;
 		border-top: 1px solid $primary-line-color;
 		box-sizing: border-box;
+		box-shadow: 0 -2px 10px 2px #f6f6f6;
 	}
 }

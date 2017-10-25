@@ -10,6 +10,7 @@
 	box-sizing: border-box;
 	background: $sidebar-color;
 	color: #fff;
+	z-index: 1;
 
 	&__tab-menu {
 		height: $top-bar-height;
