@@ -10,7 +10,7 @@
 
 	&__top-bar {
 		position: absolute;
-		height: $baseline * 2.5;
+		height: $top-bar-height;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -20,10 +20,11 @@
 
 	&__message-window {
 		position: absolute;
-		top: $baseline * 2.5;
+		top: $top-bar-height;
 		left: 0;
 		right: 0;
 		bottom: $baseline * 2.5;
+		padding: $baseline * 0.5 0;
 		overflow: auto;
 	}
 

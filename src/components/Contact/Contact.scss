@@ -5,15 +5,12 @@
 	height: $baseline * 1.5;
 	padding: $baseline * 0.5;
 	cursor: pointer;
-	background: $primary-background-color;
+	background: transparent;
+	color: #fff;
 	@include transition(all 0.15s);
 
 	&:hover {
-		background: #fcfcfc;
-	}
-
-	&:last-child {
-		border: none;
+		background: darken($sidebar-color, 5%);
 	}
 
 	&__image {
@@ -34,12 +31,12 @@
 
 	&__meta {
 		display: block;
-		@include meta-text();	
+		@include date-text($sidebar-color);	
 	}
 
 	&__date {
 		float:left;
 		margin-left: $baseline * 0.2;
-		@include date-text();	
+		@include meta-text($sidebar-color);	
 	}
 }

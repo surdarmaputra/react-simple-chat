@@ -22,7 +22,7 @@ class InputWindow extends React.Component {
 					<Input ref={input => this.input = input} placeholder={this.props.placeholder} onSubmit={this.handleSubmit} />
 				</div>
 				<div className='input-window__action'>
-					<Button text='Send' onClick={this.handleSubmit}/>
+					<Button text='Send' icon={<i className='lnr lnr-upload'></i>} onClick={this.handleSubmit}/>
 				</div>
 			</div>
 		);

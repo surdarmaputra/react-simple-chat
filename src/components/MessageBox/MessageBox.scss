@@ -7,19 +7,21 @@
 	border-bottom: 1px solid transparent;
 	@include transition(all 0.15s);
 
-	&:hover {
-		border-bottom: 1px solid $primary-line-color;
-	}
+	&:hover &__meta, &:hover &__date {
+		color: darken($primary-text-color, 10%);
+	}		
 	
 	&__meta {
 		font-weight: bold;
 		margin-bottom: $baseline * 0.2;
 		@include meta-text();
+		@include transition(all 0.15s);
 	}
 
 	&__date {
 		float: right;
 		font-weight: lighter;
 		@include date-text();
+		@include transition(all 0.15s);
 	}
 }

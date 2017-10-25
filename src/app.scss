@@ -12,14 +12,17 @@
 @import './components/MessageBox/MessageBox';
 @import './components/MessageWindow/MessageWindow';
 @import './components/WindowTopBar/WindowTopBar';
-
+@import './components/TabMenu/TabMenu';
+@import './components/SearchBox/SearchBox';
 
 .app {
-	width: 80%;
+	width: $baseline * 40;
 	height: 80%;
 	background: #fff;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	border-radius: 5px;
+	overflow: hidden;
 }

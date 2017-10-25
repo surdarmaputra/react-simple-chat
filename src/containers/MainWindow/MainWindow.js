@@ -3,6 +3,7 @@ import React from 'react';
 import WindowTopBar from '../../components/WindowTopBar';
 import MessageWindow from '../../components/MessageWindow';
 import InputWindow from '../../components/InputWindow';
+import Badge from '../../components/Badge';
 
 const messages = [
 	{
@@ -37,6 +38,8 @@ class MainWindow extends React.Component {
 					<WindowTopBar title='Window title' meta='meta' />
 				</div>
 				<div ref={element => this.messageWindow = element} className='main-window__message-window'>
+					<Badge content='Oct 21' />
+					<Badge content='You joined chat' />
 					<MessageWindow messages={this.state.messages} />
 				</div>
 				<div className='main-window__input-window'>
