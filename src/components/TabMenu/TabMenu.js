@@ -6,7 +6,7 @@ const TabMenu = (props) => {
 		<div className='tab-menu'>
 			{
 				props.menus && props.menus.map((menu, index) => (
-					<a className='tab-menu__item' href={menu.href} style={{ width: `${itemWidth}%` }}>
+					<a key={index} className='tab-menu__item' href={menu.href} style={{ width: `${itemWidth}%` }}>
 						<i className={menu.icon + ' tab-menu__icon'}></i>
 					</a>
 				))

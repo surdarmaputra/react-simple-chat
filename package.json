@@ -6,7 +6,7 @@
   "author": "sdarmaputra <Surya Darma Putra>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --hot --open",
+    "dev": "webpack-dev-server --env development --hot --open",
     "test": "mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers",
     "test:watch": "mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers"
   },
@@ -33,6 +33,7 @@
     "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
     "react-test-renderer": "^16.0.0",
+    "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",

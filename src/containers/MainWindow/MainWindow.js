@@ -1,30 +1,66 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import WindowTopBar from '../../components/WindowTopBar';
 import MessageWindow from '../../components/MessageWindow';
 import InputWindow from '../../components/InputWindow';
 import Badge from '../../components/Badge';
 
-const messages = [
-	{
-		meta: 'Surya',
-		date: 'Oct 21, 22:10',
-		content: 'Helloooooo'
-	},
-	{
-		meta: 'Jon',
-		date: 'Oct 21, 22:14',
-		content: 'Helloooooowwwww'
-	}
-];
+import { appendMessage, updateMessageInformation } from '../../actions/MessagesActions';
+import { setWindowInformation } from '../../actions/WindowActions';
 
 class MainWindow extends React.Component {
 	constructor(props) {
 		super(props);
+		this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 		this.state = {
-			messages: messages
+			messages: []
 		}
+		this.getOpenedMessage = this.getOpenedMessage.bind(this);
+		this.appendMessage = this.appendMessage.bind(this);
 		this.scrollToLastMessage = this.scrollToLastMessage.bind(this);
+	}
+
+	componentDidUpdate() {
+		this.scrollToLastMessage();
+		this.input.focusInput();
+	}
+
+	getOpenedMessage() {
+		if (this.props.messages.hasOwnProperty(`${this.props.openedMessage.messageId}`)) {
+			return this.props.messages[`${this.props.openedMessage.messageId}`].messages;
+		} else return [];
+	}
+
+	appendMessage(input) {
+		if (input.length > 0 && this.props.openedMessage.contact.id !== null) {
+			const now = new Date();
+			const date = `${this.months[now.getMonth()]} ${now.getDate()}`;
+			const time = `${('0' + now.getHours()).substr(-2)}:${('0' + now.getMinutes()).substr(-2)}`;
+			if (this.getOpenedMessage().length === 0) this.appendInitialMessage(date, time);
+			this.props.dispatch(appendMessage(this.props.openedMessage.contact, {
+				type: 'message',
+				content: input,
+				meta: 'Me',
+				date: `${date}, ${time}`
+			}));
+			this.props.dispatch(updateMessageInformation(this.props.openedMessage.messageId, {
+				meta: `Me: ${input.substr(0,10)}${input.length > 10 ? '...' : ''}`,
+				date: date
+			}));
+			this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
+		}
+	}
+
+	appendInitialMessage(date, time) {
+		this.props.dispatch(appendMessage(this.props.openedMessage.contact, {
+			type: 'badge',
+			content: `${date}, ${time}`
+		}));
+		this.props.dispatch(appendMessage(this.props.openedMessage.contact, {
+			type: 'badge',
+			content: 'You joined the conversation'
+		}));
 	}
 
 	scrollToLastMessage() {
@@ -35,27 +71,21 @@ class MainWindow extends React.Component {
 		return(
 			<div className='main-window'>
 				<div className='main-window__top-bar'>
-					<WindowTopBar title='Window title' meta='meta' />
+					<WindowTopBar title={this.props.window.title} meta={this.props.window.meta} />
 				</div>
 				<div ref={element => this.messageWindow = element} className='main-window__message-window'>
-					<Badge content='Oct 21' />
-					<Badge content='You joined chat' />
-					<MessageWindow messages={this.state.messages} />
+					<MessageWindow messages={this.getOpenedMessage()} />
 				</div>
 				<div className='main-window__input-window'>
-					<InputWindow placeholder='Say something...' onSubmit={(input) => {
-						(input.length > 0) &&
-						this.setState({
-							messages: [
-								...this.state.messages,
-								{ meta: 'Jon', date: 'Oct 24, 23:30', content: input }
-							]
-						}, this.scrollToLastMessage);
-					}} />
+					<InputWindow ref={input => this.input = input} placeholder='Say something...' onSubmit={(input) => this.appendMessage(input)} />
 				</div>
 			</div>
 		);
 	}
 }
 
-export default MainWindow;
+export default connect(state => ({ 
+	window: state.window,
+	messages: state.messages, 
+	openedMessage: state.openedMessage
+}))(MainWindow);

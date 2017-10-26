@@ -6,6 +6,7 @@ class Input extends React.Component {
 		this.listenKeyPress = this.listenKeyPress.bind(this);
 		this.getInput = this.getInput.bind(this);
 		this.clearInput = this.clearInput.bind(this);
+		this.focusInput = this.focusInput.bind(this);
 	}
 
 	listenKeyPress(event) {
@@ -27,10 +28,14 @@ class Input extends React.Component {
 	clearInput() {
 		this.input.value = '';
 	}
+	
+	focusInput() {
+		this.input.focus();
+	}
 
 	render() {
 		return (
-			<textarea ref={input => this.input = input} className='input' onKeyUp={this.listenKeyPress} placeholder={this.props.placeholder}></textarea>
+			<textarea ref={input => this.input = input} autoFocus={true} className='input' onKeyUp={this.listenKeyPress} placeholder={this.props.placeholder}></textarea>
 		);
 	}
 }

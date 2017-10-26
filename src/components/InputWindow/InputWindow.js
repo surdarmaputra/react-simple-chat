@@ -7,6 +7,7 @@ class InputWindow extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.focusInput = this.focusInput.bind(this);
 	}
 
 	handleSubmit() {
@@ -15,6 +16,10 @@ class InputWindow extends React.Component {
 		this.props.onSubmit(input);
 	}
 	
+	focusInput() {
+		this.input.focusInput();
+	}
+
 	render() {
 		return (
 			<div className='input-window'>
