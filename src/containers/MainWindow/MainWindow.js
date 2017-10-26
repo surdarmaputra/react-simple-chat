@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import WindowTopBar from '../../components/WindowTopBar';
@@ -49,6 +50,7 @@ class MainWindow extends React.Component {
 				date: date
 			}));
 			this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
+			if (this.props.location.pathname === '/contacts') this.props.history.push('/');
 		}
 	}
 
@@ -84,8 +86,8 @@ class MainWindow extends React.Component {
 	}
 }
 
-export default connect(state => ({ 
+export default withRouter(connect(state => ({ 
 	window: state.window,
 	messages: state.messages, 
 	openedMessage: state.openedMessage
-}))(MainWindow);
+}))(MainWindow));

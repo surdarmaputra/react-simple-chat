@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const TabMenu = (props) => {
 	const itemWidth = (props.menus && props.menus.length > 0) ? 100 / props.menus.length : 100;
@@ -6,9 +7,9 @@ const TabMenu = (props) => {
 		<div className='tab-menu'>
 			{
 				props.menus && props.menus.map((menu, index) => (
-					<a key={index} className='tab-menu__item' href={menu.href} style={{ width: `${itemWidth}%` }}>
+					<NavLink key={index} exact={menu.exact ? menu.exact : false} to={menu.href} className='tab-menu__item' activeClassName='tab-menu__item--active' style={{ width: `${itemWidth}%` }}>
 						<i className={menu.icon + ' tab-menu__icon'}></i>
-					</a>
+					</NavLink>
 				))
 			}
 		</div>

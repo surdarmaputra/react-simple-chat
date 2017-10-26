@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { HashRouter as Router, NavLink, Route } from 'react-router-dom';
 
 import { setWindowInformation } from './actions/WindowActions';
 import { initiateContacts } from './actions/ContactsActions';
@@ -20,10 +21,12 @@ store.dispatch(initiateMessages(messages));
 
 const App = (props) => (
 	<Provider store={store}>
-		<div className='app'>
-			<Sidebar />
-			<MainWindow />
-		</div>
+		<Router>
+			<div className='app'>
+				<Sidebar />
+				<MainWindow />
+			</div>
+		</Router>
 	</Provider>
 );
 

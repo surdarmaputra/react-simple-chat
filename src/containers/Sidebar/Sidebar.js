@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import TabMenu from '../../components/TabMenu';
@@ -11,15 +12,16 @@ import { openMessage } from '../../actions/OpenedMessageActions';
 const menus = [
 	{
 		icon: 'lnr lnr-bubble',
-		href: '#'
+		href: '/',
+		exact: true,
 	},
 	{
 		icon: 'lnr lnr-users',
-		href: '#'
+		href: '/contacts'
 	},	
 	{
 		icon: 'lnr lnr-file-empty',
-		href: '#'
+		href: '/notes'
 	},
 ];
 
@@ -31,7 +33,6 @@ class Sidebar extends React.Component {
 	}
 
 	getMessageRecipients() {
-	console.log(this.props.messages);
 		const messageKeys = Object.keys(this.props.messages);
 		return messageKeys.map(key => { 
 			let title, meta, date, image;
@@ -48,9 +49,10 @@ class Sidebar extends React.Component {
 
 	openMessage(contactId) {
 		const selectedContact = this.props.contacts.reduce((contact, current) => current.id === contactId ? current : contact, null);
+		const selectedMessage = this.props.messages[`${contactId}`];
 		this.props.dispatch(openMessage(selectedContact, contactId));
 		if (selectedContact !== null) {
-			this.props.dispatch(setWindowInformation(selectedContact.title, `Last converstaion: ${selectedContact.date ? selectedContact.date : 'never'}`));
+			this.props.dispatch(setWindowInformation(selectedContact.title, `Last converstaion: ${selectedMessage && selectedMessage.date ? selectedMessage.date : 'never'}`));
 		}
 	}
 
@@ -64,15 +66,23 @@ class Sidebar extends React.Component {
 					<SearchBox icon='lnr lnr-magnifier' />
 				</div>
 				<div className='sidebar__contact-window'>
-					<ContactWindow contacts={this.getMessageRecipients()} activeContactId={this.props.openedMessage.contact.id} onContactClick={(contactId) => this.openMessage(contactId)} />
+					<Route exact path='/' render={() => <ContactWindow 
+						contacts={this.getMessageRecipients()} 
+						activeContactId={this.props.openedMessage.contact.id} 
+						onContactClick={(contactId) => this.openMessage(contactId)} />
+					} />
+					<Route exact path='/contacts' render={() => <ContactWindow 
+						contacts={this.props.contacts}									onContactClick={(contactId) => this.openMessage(contactId)} />
+					} />
+
 				</div>
 			</div>
 		);
 	}
 }
 
-export default connect(state => ({
+export default withRouter(connect(state => ({
 	contacts: state.contacts,
 	messages: state.messages,
 	openedMessage: state.openedMessage
-}))(Sidebar);
+}))(Sidebar));

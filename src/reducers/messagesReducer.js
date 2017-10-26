@@ -11,6 +11,7 @@ const messagesReducer = (state = {}, action) => {
 				currentMessages = Object.assign({}, state);
 			} else {
 				currentMessages = {};
+				currentMessages[`${messageId}`] = {};
 				currentMessages[`${messageId}`].title = action.contact.title;
 				currentMessages[`${messageId}`].meta = action.contact.meta;
 				currentMessages[`${messageId}`].date = action.contact.date;
