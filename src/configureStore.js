@@ -6,13 +6,15 @@ import contactsReducer from './reducers/contactsReducer';
 import messagesReducer from './reducers/messagesReducer';
 import openedMessageReducer from './reducers/openedMessageReducer';
 import notesReducer from './reducers/notesReducer';
+import searchReducer from './reducers/searchReducer';
 
 const reducers = combineReducers({
 	window: windowReducer,
 	contacts: contactsReducer,
 	messages: messagesReducer,
 	openedMessage: openedMessageReducer,
-	notes: notesReducer
+	notes: notesReducer,
+	search: searchReducer
 });
 
 const middlewares = [];

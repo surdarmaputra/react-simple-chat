@@ -8,6 +8,7 @@ import SearchBox from '../../components/SearchBox';
 
 import { setWindowInformation} from '../../actions/WindowActions';
 import { openMessage } from '../../actions/OpenedMessageActions';
+import { setSearchKeyword, clearSearchKeyword } from '../../actions/SearchActions';
 
 const menus = [
 	{
@@ -29,11 +30,20 @@ class Sidebar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.getListFromObject = this.getListFromObject.bind(this);
+		this.getContacts = this.getContacts.bind(this);
 		this.openMessage = this.openMessage.bind(this);
 		this.openNote = this.openNote.bind(this);
-		}
+		this.search = this.search.bind(this);
+	}
 
-	getListFromObject(listObject) {
+	componentWillReceiveProps(nextProps) {
+		if (this.props.location.pathname !== nextProps.location.pathname && nextProps.search.length > 0) {
+			this.searchBox.clearInput();
+			this.props.dispatch(clearSearchKeyword());		
+		}
+	}
+
+	getListFromObject(listObject, search = '') {
 		const keys = Object.keys(listObject);
 		return keys.map(key => { 
 			let title, meta, date, image;
@@ -45,6 +55,20 @@ class Sidebar extends React.Component {
 				date,
 				image
 			};
+		}).filter(item => {
+			if (search.length > 0) {
+				search = search.toLowerCase();
+				return item.title.toLowerCase().includes(search) || item.meta.toLowerCase().includes(search) || item.date.toLowerCase().includes(search)
+			} else return true;
+		});
+	}
+
+	getContacts(search = '') {
+		return this.props.contacts.filter(item => {
+			if (search.length > 0) {
+				search = search.toLowerCase();
+				return item.title.toLowerCase().includes(search);
+			} else return true;
 		});
 	}
 
@@ -67,6 +91,10 @@ class Sidebar extends React.Component {
 		}
 	}
 
+	search(keyword) {
+		this.props.dispatch(setSearchKeyword(keyword));
+	}
+
 	render() {
 		return (
 			<div className='sidebar'>
@@ -74,21 +102,21 @@ class Sidebar extends React.Component {
 					<TabMenu menus={menus} />
 				</div>
 				<div className='sidebar__search-box'>
-					<SearchBox icon='lnr lnr-magnifier' />
+					<SearchBox ref={searchBox => this.searchBox = searchBox} icon='lnr lnr-magnifier' placeholder='Search for ...' onInputChange={(keyword) => this.search(keyword)} />
 				</div>
 				<div className='sidebar__contact-window'>
 					<Route exact path='/' render={() => <ContactWindow 
-						contacts={this.getListFromObject(this.props.messages)} 
+						contacts={this.getListFromObject(this.props.messages, this.props.search)} 
 						activeContactId={this.props.openedMessage.contact.id} 
 						onContactClick={(contactId) => this.openMessage(contactId)} />
 					} />
 					<Route path='/contacts' render={() => <ContactWindow 
-						contacts={this.props.contacts}
+						contacts={this.getContacts(this.props.search)}
 						activeContactId={this.props.openedMessage.contact.id} 
 						onContactClick={(contactId) => this.openMessage(contactId)} />
 					} />
 					<Route path='/notes' render={() => <ContactWindow 
-						contacts={this.getListFromObject(this.props.notes)}
+						contacts={this.getListFromObject(this.props.notes, this.props.search)}
 						activeContactId={this.props.openedMessage.messageId} 
 						onContactClick={(noteId) => this.openNote(noteId)} />
 					} />
@@ -102,5 +130,6 @@ export default withRouter(connect(state => ({
 	contacts: state.contacts,
 	messages: state.messages,
 	openedMessage: state.openedMessage,
-	notes: state.notes
+	notes: state.notes,
+	search: state.search
 }))(Sidebar));
