@@ -40,7 +40,7 @@
 	}
 
 	&__date {
-		float:left;
+		float:right;
 		margin-left: $baseline * 0.2;
 		@include meta-text($sidebar-color);	
 	}

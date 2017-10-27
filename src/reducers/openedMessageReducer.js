@@ -8,6 +8,7 @@ const initialState = {
 		date: null,
 		image: null
 	},
+	messageType: null,
 	messageId: null
 };
 
@@ -15,13 +16,8 @@ const openedMessageReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case openedMessage.OPEN_MESSAGE:
 			return {
-				contact: {
-					id: action.contact.id,
-					title: action.contact.title,
-					meta: action.contact.meta,
-					date: action.contact.date,
-					image: action.contact.image
-				},
+				contact: Object.assign({}, action.contact),
+				messageType: action.messageType,
 				messageId: action.messageId
 			};
 		default:

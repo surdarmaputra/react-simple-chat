@@ -5,12 +5,14 @@ import windowReducer from './reducers/windowReducer';
 import contactsReducer from './reducers/contactsReducer';
 import messagesReducer from './reducers/messagesReducer';
 import openedMessageReducer from './reducers/openedMessageReducer';
+import notesReducer from './reducers/notesReducer';
 
 const reducers = combineReducers({
 	window: windowReducer,
 	contacts: contactsReducer,
 	messages: messagesReducer,
-	openedMessage: openedMessageReducer
+	openedMessage: openedMessageReducer,
+	notes: notesReducer
 });
 
 const middlewares = [];

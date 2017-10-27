@@ -28,15 +28,16 @@ const menus = [
 class Sidebar extends React.Component {
 	constructor(props) {
 		super(props);
-		this.getMessages = this.getMessageRecipients.bind(this);
+		this.getListFromObject = this.getListFromObject.bind(this);
 		this.openMessage = this.openMessage.bind(this);
-	}
+		this.openNote = this.openNote.bind(this);
+		}
 
-	getMessageRecipients() {
-		const messageKeys = Object.keys(this.props.messages);
-		return messageKeys.map(key => { 
+	getListFromObject(listObject) {
+		const keys = Object.keys(listObject);
+		return keys.map(key => { 
 			let title, meta, date, image;
-			({ title, meta, date, image } = this.props.messages[`${key}`]);
+			({ title, meta, date, image } = listObject[`${key}`]);
 			return {
 				id: key,
 				title,
@@ -56,6 +57,16 @@ class Sidebar extends React.Component {
 		}
 	}
 
+	openNote(noteId) {
+		let title, meta, date, latestMonth;
+		const selectedNote = this.props.notes[`${noteId}`];
+		({ title, meta, date, latestMonth } = selectedNote);
+		if (selectedNote !== null) {
+			this.props.dispatch(openMessage({ id: noteId, title, meta, date, latestMonth }, noteId, 'note'));
+			this.props.dispatch(setWindowInformation(title, `Last updated: ${date ? date: 'never'}`));
+		}
+	}
+
 	render() {
 		return (
 			<div className='sidebar'>
@@ -67,14 +78,20 @@ class Sidebar extends React.Component {
 				</div>
 				<div className='sidebar__contact-window'>
 					<Route exact path='/' render={() => <ContactWindow 
-						contacts={this.getMessageRecipients()} 
+						contacts={this.getListFromObject(this.props.messages)} 
 						activeContactId={this.props.openedMessage.contact.id} 
 						onContactClick={(contactId) => this.openMessage(contactId)} />
 					} />
-					<Route exact path='/contacts' render={() => <ContactWindow 
-						contacts={this.props.contacts}									onContactClick={(contactId) => this.openMessage(contactId)} />
+					<Route path='/contacts' render={() => <ContactWindow 
+						contacts={this.props.contacts}
+						activeContactId={this.props.openedMessage.contact.id} 
+						onContactClick={(contactId) => this.openMessage(contactId)} />
 					} />
-
+					<Route path='/notes' render={() => <ContactWindow 
+						contacts={this.getListFromObject(this.props.notes)}
+						activeContactId={this.props.openedMessage.messageId} 
+						onContactClick={(noteId) => this.openNote(noteId)} />
+					} />
 				</div>
 			</div>
 		);
@@ -84,5 +101,6 @@ class Sidebar extends React.Component {
 export default withRouter(connect(state => ({
 	contacts: state.contacts,
 	messages: state.messages,
-	openedMessage: state.openedMessage
+	openedMessage: state.openedMessage,
+	notes: state.notes
 }))(Sidebar));
