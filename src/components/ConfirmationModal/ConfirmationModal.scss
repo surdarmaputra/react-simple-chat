@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.confirmation-modal {
+	width: $baseline * 15;
+	
+	&__text {
+		margin-bottom: $baseline;
+	}
+
+	&__actions {
+		position: relative;	
+		display: inline-block;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	&__button {
+		display: block;
+		float: left;
+		width: $baseline * 6;
+		margin-right: $baseline * 0.2;
+	}
+}

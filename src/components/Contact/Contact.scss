@@ -5,41 +5,43 @@
 	height: $baseline * 1.5;
 	padding: $baseline * 0.5;
 	cursor: pointer;
-	background: $primary-background-color;
+	background: transparent;
+	color: #fff;
 	@include transition(all 0.15s);
 
-	&:hover {
-		background: #fcfcfc;
-	}
-
-	&:last-child {
-		border: none;
+	&:hover, &--active {
+		background: darken($sidebar-color, 5%);
 	}
 
 	&__image {
+		position: relative;
 		float: left;
-		width: $baseline;
-		height: $baseline;
-		margin-right: $baseline * 0.2;
+		width: $baseline * 1.5;
+		height: $baseline * 1.5;
+		margin-right: $baseline * 0.5;
+		top: 50%;
+		transform: translateY(-50%);
+		border-radius: 50%;
 	}
 
 	&__content {
 		float: left;
-		width: 70%
+		width: 50%
 	}
 
 	&__title {
 		display: block;
+		font-size: $baseline * 0.55;
 	}
 
 	&__meta {
 		display: block;
-		@include meta-text();	
+		@include date-text($sidebar-color);	
 	}
 
 	&__date {
-		float:left;
+		float:right;
 		margin-left: $baseline * 0.2;
-		@include date-text();	
+		@include meta-text($sidebar-color);	
 	}
 }

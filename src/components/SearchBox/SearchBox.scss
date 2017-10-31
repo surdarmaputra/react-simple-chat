@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.search-box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: darken($sidebar-color, 2%);
+
+	&__form {
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		padding: $baseline * 0.4 $baseline * 0.6;
+		color: lighten($sidebar-color, 40%);
+		background: transparent;
+		outline: none;
+		border: none;
+		
+		&::placeholder {
+			color: lighten($sidebar-color, 40%);
+		}
+	}
+
+	&__icon {
+		position: absolute;
+		font-size: $baseline * 0.5;
+		color:  lighten($sidebar-color, 25%);
+		right: $baseline * 0.5;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}

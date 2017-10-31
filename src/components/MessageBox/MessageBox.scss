@@ -4,22 +4,68 @@
 .message-box {
 	padding: $base-padding;
 	margin: $base-margin;
-	border-bottom: 1px solid transparent;
 	@include transition(all 0.15s);
 
-	&:hover {
-		border-bottom: 1px solid $primary-line-color;
+	&:hover &__meta, &:hover &__date {
+		color: darken($primary-text-color, 10%);
+	}		
+
+	&__body {
+		cursor: pointer;
 	}
 	
 	&__meta {
 		font-weight: bold;
 		margin-bottom: $baseline * 0.2;
 		@include meta-text();
+		@include transition(all 0.15s);
 	}
 
 	&__date {
 		float: right;
 		font-weight: lighter;
 		@include date-text();
+		@include transition(all 0.15s);
+	}
+	
+	&__footer {
+		display: block;
+		padding: $baseline * 0.5;
+		text-align: center;
+		@include transition(all 0.15s);
+
+		&--hidden {
+			height: 0;
+			padding: 0;
+			opacity: 0;
+			overflow: hidden;
+		}
+	}
+
+	&__option {
+		padding: $baseline * 0.25 $baseline * 0.5;
+		display: inline;
+		background: transparent;
+		color: $primary-brand-color;
+		font-size: $baseline * 0.5;
+		border: 1px solid $primary-brand-color;
+		border-radius: 50px;
+		cursor: pointer;
+		@include transition(all 0.15s);
+
+		&:hover {
+			background: $primary-brand-color;
+			color: #fff;
+		}
+	
+		&--danger {
+			color: $primary-danger-color;
+			border: 1px solid $primary-danger-color;
+
+			&:hover {
+				background: $primary-danger-color;
+				color: #fff;
+			}	
+		}
 	}
 }

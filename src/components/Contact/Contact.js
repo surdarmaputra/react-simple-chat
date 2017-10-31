@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Contact = (props) => (
-	<div className='contact'>
+	<div className={`contact ${props.active ? 'contact--active' : ''}`} onClick={props.onClick}>
 		{ props.image && <img className='contact__image' src={props.image}/> }
 		<div className='contact__content'>
 			{ props.title && <div className='contact__title'>{ props.title }</div> }

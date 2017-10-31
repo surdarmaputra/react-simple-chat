@@ -15,5 +15,7 @@
 		height: 100%;
 		width: 20%;
 		float:left;
+		border-left: 1px solid $primary-line-color;
+		box-sizing: border-box;
 	}
 }
