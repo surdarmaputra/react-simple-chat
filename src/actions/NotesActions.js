@@ -22,3 +22,11 @@ export const updateNoteInformation = (noteId, information) => {
 		information	
 	}
 }
+
+export const removeNote = (noteId, noteIndex) => {
+	return {
+		type: actions.REMOVE_NOTE,
+		noteId,
+		noteIndex
+	}
+}

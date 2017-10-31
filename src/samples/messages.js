@@ -3,7 +3,7 @@
 		title: 'Python',
 		meta: 'How are yo...',
 		date: 'Oct 21',
-		image: '/public/images/cat1.jpg',
+		image: 'public/images/cat1.jpg',
 		messages: [
 			{
 				type: 'badge',

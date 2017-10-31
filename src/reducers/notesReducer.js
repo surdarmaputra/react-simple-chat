@@ -29,6 +29,13 @@ const notesReducer = (state = {}, action) => {
 			currentNotes = Object.assign({}, state);
 			currentNotes[`${noteId}`] = Object.assign({}, state[`${noteId}`], action.information);
 			return currentNotes;
+		case notes.REMOVE_NOTE:
+			noteId = action.noteId;
+			if (state.hasOwnProperty(noteId)) {
+				currentNotes = Object.assign({}, state);
+				currentNotes[noteId].notes = currentNotes[noteId].notes.filter((note, index) => index !== action.noteIndex);
+				return currentNotes;
+			} else return state;
 		default:
 			return state;
 	}

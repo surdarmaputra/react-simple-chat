@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.note-selector {
+	width: $baseline * 10;
+	margin-bottom: $baseline;
+
+	&__item {
+		display: block;
+		padding: $base-padding; 
+	}
+}

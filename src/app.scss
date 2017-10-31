@@ -14,6 +14,9 @@
 @import './components/WindowTopBar/WindowTopBar';
 @import './components/TabMenu/TabMenu';
 @import './components/SearchBox/SearchBox';
+@import './components/Modal/Modal';
+@import './components/NoteSelector/NoteSelector';
+@import './components/ConfirmationModal/ConfirmationModal';
 
 .app {
 	width: $baseline * 40;

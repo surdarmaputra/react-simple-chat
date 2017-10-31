@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "7"
+dist: trusty
+sudo: false
+cache:
+  yarn: true
+  directories:
+    - node_modules
+install:
+  - yarn
+script:
+  - yarn test
