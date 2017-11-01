@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Contact from '../Contact';
 
@@ -9,5 +10,14 @@ const ContactWindow = (props) => (
 		}
 	</div>
 );
+
+ContactWindow.propTypes = {
+	contacts: PropTypes.array,
+	onContactClick: PropTypes.func,
+	activeContactId: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number
+	])
+};
 
 export default ContactWindow;

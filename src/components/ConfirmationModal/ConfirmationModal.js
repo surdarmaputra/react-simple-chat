@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from '../Modal';
 import Button from '../Button';
@@ -9,6 +10,7 @@ class ConfirmationModal extends React.Component {
 		this.state = {
 			carriedObject: {}
 		};
+		this.toggle = this.toggle.bind(this);
 	}
 
 	toggle(carriedObject) {
@@ -36,5 +38,12 @@ class ConfirmationModal extends React.Component {
 		);
 	}
 }
+
+ConfirmationModal.propTypes = {
+	onOkayClick: PropTypes.func,
+	onCancelClick: PropTypes.func,
+	text: PropTypes.string,
+	title: PropTypes.string
+};
 
 export default ConfirmationModal;
