@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import Contact from './Contact';
 
@@ -35,5 +36,17 @@ describe('<Contact />', function() {
 		const contact = shallow(<Contact date={date} />);
 		expect(contact.find('.contact__date').length).to.be.equal(1);
 		expect(contact.find('.contact__date').contains(date)).to.be.equal(true);
+	});
+
+	it('should add contact--active class name if props.active set to true', function() {
+		const contact = shallow(<Contact active={true} />);
+		expect(contact.find('.contact--active').length).to.be.equal(1);
+	});
+
+	it('can have onClick callback when props.onClick provided', function() {
+		const callback = sinon.spy();
+		const contact = shallow(<Contact onClick={callback} />);
+		contact.find('.contact').simulate('click');
+		expect(callback.called).to.be.equal(true);
 	});
 });

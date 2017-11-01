@@ -10,7 +10,7 @@ describe('<Badge />', function() {
 		expect(badge.find('.badge').length).to.be.equal(1);
 	});
 
-	it('should render props.content', function() {
+	it('should render content if props.content provided', function() {
 		const content = 'content';
 		const badge = shallow(<Badge content={content} />);
 		expect(badge.find('.badge').contains(content)).to.be.equal(true);
