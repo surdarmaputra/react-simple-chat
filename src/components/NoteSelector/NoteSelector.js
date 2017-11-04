@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NoteSelector extends React.Component {
 	constructor(props) {
@@ -50,5 +51,9 @@ class NoteSelector extends React.Component {
 		);
 	}
 }
+
+NoteSelector.propTypes = {
+	notes: PropTypes.array
+};
 
 export default NoteSelector;

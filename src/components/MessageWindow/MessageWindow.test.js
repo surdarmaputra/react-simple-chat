@@ -4,6 +4,7 @@ import { expect } from 'chai';
 
 import MessageWindow from './MessageWindow';
 import MessageBox from '../MessageBox';
+import Badge from '../Badge';
 
 describe('<MessageWindow />', function() {
 	it('should render message-window', function() {
@@ -22,4 +23,15 @@ describe('<MessageWindow />', function() {
 		expect(messageWindow.find(MessageBox).length).to.be.equal(1);
 	});
 
+	it('should render <Badge /> for each props.messages if message.type is badge', function() {
+		const messages = [
+			{
+				type: 'badge',
+				meta: 'first meta',
+				content: 'message'
+			}
+		];
+		const messageWindow = shallow(<MessageWindow messages={messages} />);
+		expect(messageWindow.find(Badge).length).to.be.equal(1);
+	});
 });

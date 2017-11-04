@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server --env development --hot --open",
     "prepare-example": "cp -r dist docs",
     "test": "mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers",
-    "test:watch": "mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers"
+    "test:watch": "chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers'"
   },
   "dependencies": {
     "react": "^16.0.0",
@@ -27,6 +27,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "chokidar-cli": "^1.2.0",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",

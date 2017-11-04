@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import Button from '../Button';
@@ -33,5 +34,10 @@ class InputWindow extends React.Component {
 		);
 	}
 }
+
+InputWindow.propTypes = {
+	placeholder: PropTypes.string,
+	onSubmit: PropTypes.func
+};
 
 export default InputWindow;

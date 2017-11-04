@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MessageBox from '../MessageBox';
 import Badge from '../Badge';
@@ -13,5 +14,9 @@ const MessageWindow = (props) => (
 		}
 	</div>
 );
+
+MessageWindow.propTypes = {
+	messages: PropTypes.array
+};
 
 export default MessageWindow;
