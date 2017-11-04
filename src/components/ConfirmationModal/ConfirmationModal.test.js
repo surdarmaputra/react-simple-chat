@@ -45,6 +45,7 @@ describe('<ConfirmationModal />', function() {
 		confirmationModal.instance().toggle(carriedObject);
 		expect(modalToggle.called).to.be.equal(true);
 		expect(confirmationModal.state('carriedObject')).to.be.equal(carriedObject);
+		modalToggle.restore();
 	});
 
 	it('should execute callback for okay action when props.onOkacyClick provided', function() {

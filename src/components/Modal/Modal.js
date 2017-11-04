@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 class Modal extends React.Component {
 	constructor(props) {
@@ -25,5 +26,9 @@ class Modal extends React.Component {
 		);
 	}
 }
+
+Modal.propTypes = {
+	title: PropTypes.string
+};
 
 export default Modal;

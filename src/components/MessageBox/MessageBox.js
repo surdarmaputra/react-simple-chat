@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 
 class MessageBox extends React.Component {
@@ -11,7 +12,7 @@ class MessageBox extends React.Component {
 	}
 
 	toggleFooter() {
-		this.props.options.length > 0 && this.setState({
+		this.props.options && this.props.options.length > 0 && this.setState({
 			footerOpened: !this.state.footerOpened
 		});
 	}
@@ -21,7 +22,7 @@ class MessageBox extends React.Component {
 			<div className='message-box'>
 				<div className='message-box__body' onClick={this.toggleFooter}>
 					<div className='message-box__meta'>
-						{ this.props.meta } 
+						{ this.props.meta && this.props.meta } 
 						{ this.props.date && <div className='message-box__date'>{ this.props.date }</div> }
 					</div>
 					<div className='message-box__content'>
@@ -50,5 +51,12 @@ class MessageBox extends React.Component {
 		);
 	}
 }
+
+MessageBox.propTypes = {
+	content: PropTypes.string,
+	meta: PropTypes.string,
+	date: PropTypes.string,
+	options: PropTypes.array
+};
 
 export default MessageBox;
