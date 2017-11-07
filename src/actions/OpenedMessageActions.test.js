@@ -11,6 +11,12 @@ describe('OpenedMessageActions', function() {
 		};
 		const messageId = 'm01';
 		const messageType = 'message';
+		expect(actions.openMessage(contact, messageId)).to.be.deep.equal({
+			type: types.OPEN_MESSAGE,
+			contact,
+			messageId,
+			messageType: 'message'
+		});
 		expect(actions.openMessage(contact, messageId, messageType)).to.be.deep.equal({
 			type: types.OPEN_MESSAGE,
 			contact,
