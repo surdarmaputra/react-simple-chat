@@ -9,8 +9,12 @@
     "build": "webpack -p",
     "dev": "webpack-dev-server --env development --hot --open",
     "prepare-example": "cp -r dist docs",
-    "test": "mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers",
-    "test:watch": "chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers'"
+    "test": "cross-env NODE_ENV=test nyc -x 'src/**/*.test.js' -x src/configureStore.js --reporter=html --reporter=text mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers src/actions src/reducers src/helpers",
+    "test:watch": "cross-env NODE_ENV=test chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers src/helpers'"
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "react": "^16.0.0",
@@ -23,12 +27,14 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chokidar-cli": "^1.2.0",
     "copy-webpack-plugin": "^4.2.0",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
@@ -38,6 +44,7 @@
     "jsdom": "^11.3.0",
     "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
+    "nyc": "^11.3.0",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",

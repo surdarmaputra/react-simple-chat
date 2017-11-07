@@ -78,5 +78,10 @@ describe('notesReducer', function() {
 			noteId,
 			noteIndex
 		})).to.be.deep.equal(expectedState);
+		expect(reducer(notes, {
+			type: types.REMOVE_NOTE,
+			noteId: 'notAvail',
+			noteIndex
+		})).to.be.deep.equal(notes);
 	});
 });

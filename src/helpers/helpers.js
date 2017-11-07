@@ -21,8 +21,6 @@ export const getListFromArray = (listArray = [], search = '', searchableProperty
 
 export const isObjectContainsKeyword = (object = {}, keyword = '', searchablePropertyNames = []) => {
 	keyword = keyword.toLowerCase();
-	console.log(`keyword: ${keyword}`)
-	console.log()
 	return searchablePropertyNames.reduce((result, key) => object[key] && object[key].toLowerCase().includes(keyword) ? true : result, false);
 }
 

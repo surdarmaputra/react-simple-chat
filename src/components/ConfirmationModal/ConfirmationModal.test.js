@@ -48,6 +48,15 @@ describe('<ConfirmationModal />', function() {
 		modalToggle.restore();
 	});
 
+	it('should only execute modal.toggle() without setting state.carriedObject if toggle() method invoked without carriedObject argument', function() {
+		const confirmationModal = mount(<ConfirmationModal />);
+		const modalToggle = sinon.spy(confirmationModal.instance().modal, 'toggle');
+		confirmationModal.instance().toggle();
+		expect(modalToggle.called).to.be.equal(true);
+		expect(confirmationModal.state('carriedObject')).to.be.deep.equal({});
+		modalToggle.restore();
+	});
+
 	it('should execute callback for okay action when props.onOkacyClick provided', function() {
 		const callback = sinon.spy();
 		const confirmationModal = shallow(<ConfirmationModal onOkayClick={callback} />);
