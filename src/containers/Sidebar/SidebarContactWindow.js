@@ -7,7 +7,7 @@ import { setWindowInformation} from '../../actions/WindowActions';
 import { openMessage } from '../../actions/OpenedMessageActions';
 import { getListFromObject, getListFromArray } from '../../helpers';
 
-class SidebarContactWindow extends React.Component {
+export class SidebarContactWindow extends React.Component {
 	constructor(props) {
 		super(props)
 		this.openMessage = this.openMessage.bind(this);
@@ -17,17 +17,17 @@ class SidebarContactWindow extends React.Component {
 	openMessage(contactId) {
 		const selectedContact = this.props.contacts.reduce((contact, current) => current.id === contactId ? current : contact, null);
 		const selectedMessage = this.props.messages[`${contactId}`];
-		this.props.dispatch(openMessage(selectedContact, contactId));
 		if (selectedContact !== null) {
-			this.props.dispatch(setWindowInformation(selectedContact.title, `Last converstaion: ${selectedMessage && selectedMessage.date ? selectedMessage.date : 'never'}`));
+			this.props.dispatch(openMessage(selectedContact, contactId));
+			this.props.dispatch(setWindowInformation(selectedContact.title, `Last conversation: ${selectedMessage && selectedMessage.date ? selectedMessage.date : 'never'}`));
 		}
 	}
 
 	openNote(noteId) {
 		let title, meta, date, latestMonth;
 		const selectedNote = this.props.notes[`${noteId}`];
-		({ title, meta, date, latestMonth } = selectedNote);
-		if (selectedNote !== null) {
+		if (typeof selectedNote !== 'undefined') {
+			({ title, meta, date, latestMonth } = selectedNote);
 			this.props.dispatch(openMessage({ id: noteId, title, meta, date, latestMonth }, noteId, 'note'));
 			this.props.dispatch(setWindowInformation(title, `Last updated: ${date ? date: 'never'}`));
 		}
