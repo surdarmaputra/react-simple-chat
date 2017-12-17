@@ -13,12 +13,13 @@ import configureStore from '../../configureStore';
 import { setSearchKeyword } from '../../actions/SearchActions';
 
 const store = configureStore();
-store.dispatch(setSearchKeyword('test'));
 
 const App = () => (
 	<Provider store={store}>
 		<MemoryRouter>
-			<Sidebar />
+			<div>
+				<Sidebar />
+			</div>
 		</MemoryRouter>
 	</Provider>
 );
@@ -36,5 +37,16 @@ describe('<Sidebar> container', function() {
 		expect(this.sidebar.find(SidebarTabMenu).length).to.be.equal(1);
 		expect(this.sidebar.find(SidebarSearchBox).length).to.be.equal(1);
 		expect(this.sidebar.find(SidebarContactWindow).length).to.be.equal(1);
+	});
+
+	it('should clear search box keyword if route changes and search box is not empty', function() {
+		const keyword = 'test';
+		store.dispatch(setSearchKeyword(keyword));
+		let keywordBeforeNavigation, keywordAfterNavigation;
+		keywordBeforeNavigation = store.getState().search;
+		this.sidebar.find('a[href="/contacts"]').simulate('click', { button: 0 });
+		keywordAfterNavigation = store.getState().search;
+		expect(keywordBeforeNavigation).to.be.equal(keyword);
+		expect(keywordAfterNavigation).to.be.equal('');
 	});
 });
