@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import InputWindow from '../../components/InputWindow';
 
 import { appendMessage, updateMessageInformation } from '../../actions/MessagesActions';
-import { appendNote, updateNoteInformation, removeNote } from '../../actions/NotesActions';
+import { appendNote, updateNoteInformation } from '../../actions/NotesActions';
 import { setWindowInformation } from '../../actions/WindowActions';
 
 import { months } from '../../helpers';
 
-class MainInput extends React.Component {
+export class MainInput extends React.Component {
 	constructor(props) {
 		super(props);	
 		this.processInput = this.processInput.bind(this);
@@ -32,10 +31,11 @@ class MainInput extends React.Component {
 			const time = `${('0' + now.getHours()).substr(-2)}:${('0' + now.getMinutes()).substr(-2)}`;
 			if (this.props.openedMessage.messageType === 'message') {
 				this.appendMessage(input, date, time);
+				this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
 			} else if (this.props.openedMessage.messageType === 'note') {
 				this.appendNote(this.props.openedMessage.messageId, input, date, time, this.props.openedMessage.contact.latestMonth);
-			}
-			this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
+				this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
+			}	
 		}
 	}
 
@@ -55,7 +55,7 @@ class MainInput extends React.Component {
 	}
 
 	appendNote(messageId, input, date, time, messageLatestMonth) {
-		if (date.split(' ')[0].toLowerCase() !== messageLatestMonth.toLowerCase()) this.appendInitialNote(messageId, date);
+		if (!messageLatestMonth || date.split(' ')[0].toLowerCase() !== messageLatestMonth.toLowerCase()) this.appendInitialNote(messageId, date);
 		this.props.dispatch(appendNote(messageId, {
 			type: 'message',
 			content: input,
@@ -63,7 +63,8 @@ class MainInput extends React.Component {
 		}));	
 		this.props.dispatch(updateNoteInformation(messageId, {
 			meta: `${input.substr(0,10)}${input.length > 10 ? '...' : ''}`,
-			date: date
+			date: date,
+			latestMonth: date.split(' ')[0].toLowerCase()
 		}));
 	}
 
