@@ -98,4 +98,4 @@ export class MainInput extends React.Component {
 export default withRouter(connect(state => ({ 
 	window: state.window,
 	openedMessage: state.openedMessage
-}))(MainInput));
+}), null, null, { withRef: true })(MainInput));

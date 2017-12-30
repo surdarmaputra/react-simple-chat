@@ -13,7 +13,7 @@ import { appendNote, removeNote } from '../../actions/NotesActions';
 
 import { months } from '../../helpers';
 
-class MainWindow extends React.Component {
+export class MainWindow extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -59,11 +59,10 @@ class MainWindow extends React.Component {
 				});
 				break;
 			default:
-				listObject = Object.assign({}, this.props.messages);			
-				customProperties = (item) => ({});		
+				listObject = {};		
 		}
 
-		if (listObject.hasOwnProperty(`${this.props.openedMessage.messageId}`)) {
+		if (listObject.hasOwnProperty(`${this.props.openedMessage.messageId}`) && listObject[`${this.props.openedMessage.messageId}`].hasOwnProperty(`${this.props.openedMessage.messageType}s`)) {
 			let finalList = listObject[`${this.props.openedMessage.messageId}`][`${this.props.openedMessage.messageType}s`];
 			return finalList.map((item, index) => Object.assign({}, item, customProperties(item, index)));
 		} else return [];
@@ -80,7 +79,6 @@ class MainWindow extends React.Component {
 				title,
 				meta,
 				date,
-				image,
 				latestMonth
 			};
 		});
@@ -95,12 +93,11 @@ class MainWindow extends React.Component {
 		const now = new Date();
 		const date = `${months[now.getMonth()]} ${now.getDate()}`;
 		const time = `${('0' + now.getHours()).substr(-2)}:${('0' + now.getMinutes()).substr(-2)}`;
-
 		notes.map(note => {
-			this.appendNote(note.id, message.content, date, time, note.latestMonth);
+			this.mainInput.getWrappedInstance().appendNote(note.id, message.content, date, time, note.latestMonth);
 		})
 	}
-
+	
 	scrollToLastMessage() {
 		this.messageWindow.scrollTop = this.messageWindow.scrollHeight;
 	}
@@ -129,7 +126,7 @@ class MainWindow extends React.Component {
 				<div ref={element => this.messageWindow = element} className='main-window__message-window'>
 					<MessageWindow messages={this.getOpenedMessage()} />
 				</div>
-				<MainInput activeMessages={ this.getOpenedMessage() }/>
+				<MainInput wrappedComponentRef={mainInput => this.mainInput = mainInput} activeMessages={ this.getOpenedMessage() }/>
 			</div>
 		);
 	}
