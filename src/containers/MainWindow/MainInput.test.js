@@ -7,11 +7,8 @@ import sinon from 'sinon';
 import { NavLink } from 'react-router-dom';
 
 import ConnectedMainInput, { MainInput } from './MainInput.js';
-import Button from '../../components/Button';
 
 import configureStore from '../../configureStore';
-
-
 import { initiateContacts } from '../../actions/ContactsActions';
 import { initiateMessages } from '../../actions/MessagesActions';
 import { initiateNotes } from '../../actions/NotesActions';
@@ -41,7 +38,6 @@ const App = (props) => (
 		</MemoryRouter>
 	</Provider>
 );
-
 
 describe('<MainInput />', function() {
 	beforeEach(function() {
