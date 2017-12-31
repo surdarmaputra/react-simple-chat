@@ -7,6 +7,7 @@ import InputWindow from '../../components/InputWindow';
 import { appendMessage, updateMessageInformation } from '../../actions/MessagesActions';
 import { appendNote, updateNoteInformation } from '../../actions/NotesActions';
 import { setWindowInformation } from '../../actions/WindowActions';
+import { updateOpenedMessage } from '../../actions/OpenedMessageActions.js';
 
 import { months } from '../../helpers';
 
@@ -27,13 +28,13 @@ export class MainInput extends React.Component {
 	processInput(input) {
 		if (input.length > 0 && this.props.openedMessage.contact.id !== null) {
 			const now = new Date();
-			const date = `${months[now.getMonth()]} ${now.getDate()}`;
+			const date = `${months[now.getMonth()]} ${now.getDate()} ${now.getFullYear()}`;
 			const time = `${('0' + now.getHours()).substr(-2)}:${('0' + now.getMinutes()).substr(-2)}`;
 			if (this.props.openedMessage.messageType === 'message') {
 				this.appendMessage(input, date, time);
 				this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
 			} else if (this.props.openedMessage.messageType === 'note') {
-				this.appendNote(this.props.openedMessage.messageId, input, date, time, this.props.openedMessage.contact.latestMonth);
+				this.appendNote(this.props.openedMessage.messageId, input, date, time);
 				this.props.dispatch(setWindowInformation(this.props.window.title, `Last conversation: ${date}`));
 			}	
 		}
@@ -45,7 +46,8 @@ export class MainInput extends React.Component {
 			type: 'message',
 			content: input,
 			meta: 'Me',
-			date: `${date}, ${time}`
+			date: `${date}, ${time}`,
+			messageFromMyself: true
 		}));
 		this.props.dispatch(updateMessageInformation(this.props.openedMessage.messageId, {
 			meta: `Me: ${input.substr(0,10)}${input.length > 10 ? '...' : ''}`,
@@ -54,17 +56,19 @@ export class MainInput extends React.Component {
 		if (this.props.location.pathname === '/contacts') this.props.history.push('/');
 	}
 
-	appendNote(messageId, input, date, time, messageLatestMonth) {
-		if (!messageLatestMonth || date.split(' ')[0].toLowerCase() !== messageLatestMonth.toLowerCase()) this.appendInitialNote(messageId, date);
+	appendNote(messageId, input, date, time) {
+		const selectedNote = this.props.notes[messageId];
+		if (!selectedNote || !selectedNote.latestMonth || `${date.split(' ')[0].toLowerCase()} ${date.split(' ')[2]}` !== selectedNote.latestMonth.toLowerCase()) this.appendInitialNote(messageId, date);
 		this.props.dispatch(appendNote(messageId, {
 			type: 'message',
 			content: input,
-			date: `${date}, ${time}`
+			date: `${date}, ${time}`,
+			messageFromMyself: true
 		}));	
 		this.props.dispatch(updateNoteInformation(messageId, {
 			meta: `${input.substr(0,10)}${input.length > 10 ? '...' : ''}`,
 			date: date,
-			latestMonth: date.split(' ')[0].toLowerCase()
+			latestMonth: `${date.split(' ')[0].toLowerCase()} ${date.split(' ')[2]}`
 		}));
 	}
 
@@ -82,7 +86,7 @@ export class MainInput extends React.Component {
 	appendInitialNote(messageId, date) {
 		this.props.dispatch(appendNote(messageId, {
 			type: 'badge',
-			content: date
+			content: `${date.split(' ')[0]} ${date.split(' ')[2]}`
 		}));
 	}
 
@@ -97,5 +101,6 @@ export class MainInput extends React.Component {
 
 export default withRouter(connect(state => ({ 
 	window: state.window,
-	openedMessage: state.openedMessage
+	openedMessage: state.openedMessage,
+	notes: state.notes
 }), null, null, { withRef: true })(MainInput));

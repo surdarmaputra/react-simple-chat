@@ -19,7 +19,7 @@ class MessageBox extends React.Component {
 
 	render() {
 		return (
-			<div className='message-box'>
+			<div className={`message-box ${ this.props.messageFromMyself ? 'message-box--from-me' : '' }`}>
 				<div className='message-box__body' onClick={this.toggleFooter}>
 					<div className='message-box__meta'>
 						{ this.props.meta && this.props.meta } 
@@ -56,7 +56,8 @@ MessageBox.propTypes = {
 	content: PropTypes.string,
 	meta: PropTypes.string,
 	date: PropTypes.string,
-	options: PropTypes.array
+	options: PropTypes.array,
+	messageFromMyself: PropTypes.bool
 };
 
 export default MessageBox;

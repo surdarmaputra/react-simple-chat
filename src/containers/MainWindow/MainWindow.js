@@ -91,7 +91,7 @@ export class MainWindow extends React.Component {
 
 	appendMessageToNote(notes, message) {
 		const now = new Date();
-		const date = `${months[now.getMonth()]} ${now.getDate()}`;
+		const date = `${months[now.getMonth()]} ${now.getDate()} ${now.getFullYear()}`;
 		const time = `${('0' + now.getHours()).substr(-2)}:${('0' + now.getMinutes()).substr(-2)}`;
 		notes.map(note => {
 			this.mainInput.getWrappedInstance().appendNote(note.id, message.content, date, time, note.latestMonth);
