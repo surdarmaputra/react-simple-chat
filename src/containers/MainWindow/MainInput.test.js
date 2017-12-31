@@ -113,8 +113,8 @@ describe('<MainInput />', function() {
 			expect(this.mainInput.find(MainInput).get(0).props.location.pathname).to.be.equal('/');
 		});
 
-		it('should append ... to message information if input length > 10', function() {
-			const sampleInput = 'something more than 10 characters';
+		it('should append ... to message information if input length > 6', function() {
+			const sampleInput = 'something more than 6 characters';
 			let dispatchArg;
 			store.dispatch(openMessage(this.contactHaveMessage[0], this.contactHaveMessage[0].id, 'message'));			
 			this.mainInput.setProps({ activeMessages: messages[this.contactHaveMessage[0].id].messages });
@@ -130,7 +130,7 @@ describe('<MainInput />', function() {
 			dispatchArg  = dispatch.getCall(1).args[0];
 			expect(dispatchArg.type).to.be.equal('UPDATE_MESSAGE_INFORMATION');
 			expect(dispatchArg.messageId).to.be.equal(this.contactHaveMessage[0].id);
-			expect(dispatchArg.information.meta).to.be.equal(`Me: ${sampleInput.substr(0,10)}...`);
+			expect(dispatchArg.information.meta).to.be.equal(`Me: ${sampleInput.substr(0,6)}...`);
 			dispatchArg = dispatch.getCall(2).args[0];
 			expect(dispatchArg.type).to.be.equal('SET_WINDOW_INFORMATION');
 		});

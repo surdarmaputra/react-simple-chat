@@ -50,7 +50,7 @@ export class MainInput extends React.Component {
 			messageFromMyself: true
 		}));
 		this.props.dispatch(updateMessageInformation(this.props.openedMessage.messageId, {
-			meta: `Me: ${input.substr(0,10)}${input.length > 10 ? '...' : ''}`,
+			meta: `Me: ${input.substr(0,6)}${input.length > 6 ? '...' : ''}`,
 			date: date
 		}));
 		if (this.props.location.pathname === '/contacts') this.props.history.push('/');
