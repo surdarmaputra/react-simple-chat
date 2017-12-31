@@ -8,3 +8,11 @@ export const openMessage = (contact, messageId, messageType = 'message') => {
 		messageType
 	}
 }
+
+export const updateOpenedMessage = (messageId, contact) => {
+	return {
+		type: actions.UPDATE_OPENED_MESSAGE,
+		contact,
+		messageId
+	}
+}

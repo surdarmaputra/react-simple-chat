@@ -168,7 +168,7 @@ describe('<MainInput />', function() {
 			const note = notes[this.noteIds[0]];
 			const sampleInput = 'test';
 			const thisMonthNotes = Object.assign({}, notes);
-			thisMonthNotes[this.noteIds[0]].latestMonth = months[now.getMonth()];
+			thisMonthNotes[this.noteIds[0]].latestMonth = `${months[now.getMonth()]} ${now.getFullYear()}`;
 			let dispatchArg;
 			store.dispatch(initiateNotes(thisMonthNotes));
 			store.dispatch(openMessage({ id: this.noteIds[0], title: note.title, meta: note.meta, date: note.date, latestMonth: note.latestMonth }, this.noteIds[0], 'note'));
@@ -192,7 +192,7 @@ describe('<MainInput />', function() {
 			const note = notes[this.noteIds[0]];
 			const sampleInput = 'something more than 10 characters';
 			const thisMonthNotes = Object.assign({}, notes);
-			thisMonthNotes[this.noteIds[0]].latestMonth = months[now.getMonth()];
+			thisMonthNotes[this.noteIds[0]].latestMonth = `${months[now.getMonth()]} ${now.getFullYear()}`;
 			let dispatchArg;
 			store.dispatch(initiateNotes(thisMonthNotes));
 			store.dispatch(openMessage({ id: this.noteIds[0], title: note.title, meta: note.meta, date: note.date, latestMonth: note.latestMonth }, this.noteIds[0], 'note'));

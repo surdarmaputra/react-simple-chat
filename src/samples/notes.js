@@ -3,16 +3,17 @@ const notes = {
 		title: 'Default Note',
 		meta: 'This is no...',
 		date: 'Oct 21',
-		latestMonth: 'oct',
+		latestMonth: 'oct 2017',
 		notes: [
 			{
 				type: 'badge',
-				content: 'Oct 1'
+				content: 'Oct 2017'
 			},
 			{
 				type: 'message',
 				content: 'This is note',
-				date: 'Oct 21, 08:00'
+				date: 'Oct 21 2017, 08:00',
+				messageFromMyself: true
 			}
 		]
 	}

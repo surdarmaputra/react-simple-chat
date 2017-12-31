@@ -33,7 +33,7 @@ const notesReducer = (state = {}, action) => {
 			noteId = action.noteId;
 			if (state.hasOwnProperty(noteId)) {
 				currentNotes = Object.assign({}, state);
-				currentNotes[noteId].notes = currentNotes[noteId].notes.filter((note, index) => index !== action.noteIndex);
+				currentNotes[noteId].notes = currentNotes[noteId].notes.map((note, index) => index !== action.noteIndex ? note : { type: 'badge', content: '- Note has been removed -' });
 				return currentNotes;
 			} else return state;
 		default:

@@ -23,7 +23,7 @@ const contacts = [
 	{
 		id: 'abc105',
 		title: 'Phoenix',
-		meta: 'I\'m handsome \\m/',
+		meta: 'I\'m handsome',
 		image: 'public/images/cat5.jpg'
 	},
 	{

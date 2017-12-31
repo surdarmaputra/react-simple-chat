@@ -10,7 +10,7 @@
 	font-size: $baseline * 0.4;
 	text-align: center;
 	background: #fafafa;
-	border: 1px solid $primary-line-color;
+	border: 1px solid darken($primary-line-color, 5%);
 	min-width: 10px;
 	border-radius: 50px;
 }

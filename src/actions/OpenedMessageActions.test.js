@@ -4,7 +4,7 @@ import * as types from '../constants/openedMessage';
 import * as actions from './OpenedMessageActions';
 
 describe('OpenedMessageActions', function() {
-	it('should have openMEssage(contact, messageId, messageType) with contact as object, messageId as string or integer and messageType as string', function() {
+	it('should have openMessage(contact, messageId, messageType) with contact as object, messageId as string or integer and messageType as string', function() {
 		const contact = {
 			id: 'c01',
 			title: 'Contact 1'
@@ -22,6 +22,18 @@ describe('OpenedMessageActions', function() {
 			contact,
 			messageId,
 			messageType
+		});
+	});
+	
+	it('should have updateOpenedMessage() with messageId and contact as argument to update opened message\'s contact', function() {
+		const updatedContact = {
+			title: 'Updated'
+		};
+		const messageId = 'm01';
+		expect(actions.updateOpenedMessage(messageId, updatedContact)).to.be.deep.equal({
+			type: types.UPDATE_OPENED_MESSAGE,
+			contact: updatedContact,
+			messageId
 		});
 	});
 });
