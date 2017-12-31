@@ -7,9 +7,6 @@ Just a simple chat app without backend. Built to implement and understand React 
 [Demo](https://sdarmaputra.github.io/react-simple-chat)
 
 
-![sample](./src/public/samples/sc-react-simple-chat.mp4)
-
-
 ## Quick Start ##
 1. Clone this repo: `git clone https://github.com/sdarmaputra/react-simple-chat`.
 2. Install dependencies: `yarn install` or `npm install`.
