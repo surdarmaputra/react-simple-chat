@@ -9,8 +9,9 @@
     "build": "webpack -p",
     "dev": "webpack-dev-server --env development --hot --open",
     "prepare-example": "cp -r dist docs",
-    "test": "cross-env NODE_ENV=test nyc -x 'src/**/*.test.js' -x src/configureStore.js --reporter=html --reporter=text mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers src/actions src/reducers src/helpers",
-    "test:watch": "cross-env NODE_ENV=test chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers src/helpers'"
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary --reporter=html -x 'src/**/*.test.js' -x src/configureStore.js --reporter=html --reporter=text mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers src/actions src/reducers src/helpers",
+    "test:watch": "cross-env NODE_ENV=test chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers src/helpers'",
+	"coveralls": "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "nyc": {
     "sourceMap": false,
@@ -34,6 +35,7 @@
     "chai": "^4.1.2",
     "chokidar-cli": "^1.2.0",
     "copy-webpack-plugin": "^4.2.0",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
