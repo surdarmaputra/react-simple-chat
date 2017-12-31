@@ -52,3 +52,5 @@ Several libraries used by `react-simple-chat`:
 
 ## License ##
 [MIT](https://opensource.org/licenses/MIT)
+
+Build with :heart: by [sdarmaputra](https://github.com/sdarmaputra)
