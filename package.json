@@ -6,9 +6,9 @@
   "author": "sdarmaputra <Surya Darma Putra>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack -p",
+    "build": "rm -rf dist && webpack -p",
     "dev": "webpack-dev-server --env development --hot --open",
-    "prepare-example": "cp -r dist docs",
+    "prepare-example": "rm -rf docs && cp -r dist docs",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary --reporter=html -x 'src/**/*.test.js' -x src/configureStore.js --reporter=html --reporter=text mocha --require babel-register --require ignore-styles --require testSetup.js --recursive src/components src/containers src/actions src/reducers src/helpers",
     "test:watch": "cross-env NODE_ENV=test chokidar 'src/**/*.js' --initial -c 'mocha --require babel-register --require ignore-styles --require testSetup.js --recursive -w --watch-extensions js src/components src/containers src/actions src/reducers src/helpers'",
 	"coveralls": "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
